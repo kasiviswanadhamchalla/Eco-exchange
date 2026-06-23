@@ -39,4 +39,14 @@ public class OrganizationController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/{id}/admin-email")
+    public ResponseEntity<String> getOrganizationAdminEmail(@PathVariable Long id) {
+        try {
+            String email = organizationService.getOrganizationAdminEmail(id);
+            return ResponseEntity.ok(email);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

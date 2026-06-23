@@ -27,6 +27,7 @@ public class SecurityConfig {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/api/organizations/*/admin-email").permitAll()
                 .requestMatchers("/api/organizations/*/verify").hasRole("PLATFORM_ADMIN")
                 .requestMatchers("/api/organizations/*/suspend").hasRole("PLATFORM_ADMIN")
                 .anyRequest().authenticated()
