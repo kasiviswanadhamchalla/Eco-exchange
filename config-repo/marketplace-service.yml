@@ -13,3 +13,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
+
+jwt:
+  secret: super-secret-key-for-jwt-signing-change-in-production
+  expiration: 86400000
