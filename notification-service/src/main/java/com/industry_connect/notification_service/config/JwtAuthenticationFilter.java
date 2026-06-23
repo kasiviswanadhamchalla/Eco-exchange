@@ -1,4 +1,4 @@
-package com.industry_connect.identity_service.config;
+package com.industry_connect.notification_service.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -23,7 +23,7 @@ import java.util.List;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    @Value("${jwt.secret:default-secret-key-for-development-change-in-production}")
+    @Value("${jwt.secret:super-secret-key-for-jwt-signing-change-in-production}")
     private String jwtSecret;
 
     @Override
@@ -44,11 +44,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 String email = claims.getSubject();
                 String role = claims.get("role", String.class);
                 
+                Object userIdObj = claims.get("userId");
+                Long userId = userIdObj != null ? ((Number) userIdObj).longValue() : null;
+
                 Object orgIdObj = claims.get("organizationId");
                 Long orgId = orgIdObj != null ? ((Number) orgIdObj).longValue() : null;
 
                 if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                    // Map platform admin (role is ADMIN or PLATFORM_ADMIN and orgId is null)
                     String authorityRole;
                     if (("ADMIN".equalsIgnoreCase(role) || "PLATFORM_ADMIN".equalsIgnoreCase(role)) && orgId == null) {
                         authorityRole = "ROLE_PLATFORM_ADMIN";
@@ -62,14 +64,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                             new SimpleGrantedAuthority(authorityRole)
                     );
 
+                    UserPrincipal principal = new UserPrincipal(userId, email, orgId, role);
+
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                            email, null, authorities
+                            principal, null, authorities
                     );
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
             } catch (Exception e) {
-                // Invalid token, do not set authentication
+                // Invalid token
             }
         }
 

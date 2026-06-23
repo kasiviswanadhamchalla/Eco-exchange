@@ -123,4 +123,30 @@ public class OrganizationServiceTest {
 
         assertEquals("SUSPENDED", result.getVerificationStatus());
     }
+
+    @Test
+    void testGetOrganizationAdminEmail_Success() {
+        User user = new User();
+        user.setEmail("admin@eco.com");
+        user.setRole("ADMIN");
+
+        when(userRepository.findByOrganizationId(10L)).thenReturn(java.util.List.of(user));
+
+        String email = organizationService.getOrganizationAdminEmail(10L);
+
+        assertEquals("admin@eco.com", email);
+        verify(userRepository, times(1)).findByOrganizationId(10L);
+    }
+
+    @Test
+    void testGetOrganizationAdminEmail_NotFound() {
+        when(userRepository.findByOrganizationId(10L)).thenReturn(java.util.Collections.emptyList());
+
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            organizationService.getOrganizationAdminEmail(10L);
+        });
+
+        assertTrue(exception.getMessage().contains("No admin user found for organization ID: 10"));
+        verify(userRepository, times(1)).findByOrganizationId(10L);
+    }
 }
