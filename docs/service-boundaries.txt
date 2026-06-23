@@ -1,0 +1,55 @@
+Identity Service
+
+Owns:
+
+- Users
+- Roles
+- Organizations
+- Authentication
+
+Marketplace Service
+
+Owns:
+
+- Listings
+- Categories
+- Certificates
+- Offers
+
+Order Service
+
+Owns:
+
+- Orders
+- Transactions
+- Shipments
+
+Search Service
+
+Owns:
+
+- Elasticsearch Indexes
+- Search APIs
+
+Notification Service
+
+Owns:
+
+- Email
+- Event Notifications
+
+Analytics Service
+
+Owns:
+
+- Metrics
+- Reporting
+
+Rule:
+
+No Service Accesses Another Database
+
+Communication:
+
+REST
+Kafka
