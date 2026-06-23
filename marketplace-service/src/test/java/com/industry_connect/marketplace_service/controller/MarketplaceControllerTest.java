@@ -82,4 +82,21 @@ public class MarketplaceControllerTest {
         assertEquals(300L, body.getId());
         verifyNoInteractions(marketplaceService);
     }
+
+    @Test
+    void testGetOffer_Success() {
+        OfferResponse mockResponse = new OfferResponse();
+        mockResponse.setId(200L);
+        mockResponse.setListingId(10L);
+
+        when(marketplaceService.getOffer(200L)).thenReturn(mockResponse);
+
+        ResponseEntity<OfferResponse> response = marketplaceController.getOffer(200L);
+
+        assertNotNull(response);
+        assertEquals(200, response.getStatusCode().value());
+        assertEquals(200L, response.getBody().getId());
+        assertEquals(10L, response.getBody().getListingId());
+        verify(marketplaceService, times(1)).getOffer(200L);
+    }
 }
