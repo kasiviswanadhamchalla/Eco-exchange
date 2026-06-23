@@ -1,0 +1,87 @@
+# IndustryConnect
+
+## Problem Statement
+
+Manufacturing industries generate waste materials such as:
+
+- Steel Scrap
+- Fly Ash
+- Plastic Scrap
+- Textile Waste
+- Wood Waste
+- Glass Waste
+
+These materials are often discarded despite having market value.
+
+At the same time:
+
+- Recyclers
+- Construction Companies
+- Cement Manufacturers
+- Packaging Industries
+
+purchase similar materials as raw inputs.
+
+IndustryConnect connects waste producers and waste consumers through a B2B marketplace.
+
+---
+
+# Goals
+
+Allow organizations to:
+
+1. List waste materials
+2. Search materials
+3. Place offers
+4. Purchase inventory
+5. Track transactions
+6. Measure waste reused
+
+---
+
+# Functional Requirements
+
+## Seller
+
+- Register organization
+- Create listing
+- Upload images
+- Upload quality certificates
+- Manage inventory
+- Accept offers
+- Reject offers
+- View sales history
+
+## Buyer
+
+- Search listings
+- View material details
+- Place offer
+- Buy material
+- Track orders
+- Download certificates
+
+## Logistics Partner
+
+- View assigned shipments
+- Accept shipment
+- Update shipment status
+
+## Admin
+
+- Verify organizations
+- Suspend organizations
+- Moderate listings
+- View platform analytics
+
+---
+
+# Non Functional Requirements
+
+- High availability
+- Event driven
+- Distributed architecture
+- Idempotent operations
+- Audit logging
+- Distributed tracing
+- Search performance < 500ms

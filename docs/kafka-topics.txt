@@ -1,0 +1,102 @@
+listing-events
+
+offer-events
+
+order-events
+
+shipment-events
+
+notification-events
+
+audit-events
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+kafka retry strategy
+
+
+offer-events
+        ↓
+Consumer Fails
+        ↓
+Retry Topic
+        ↓
+Retry Again
+        ↓
+DLQ
+
+topics:
+
+offer-events
+
+offer-events-retry
+
+offer-events-dlq
+
+DLQ strategy:
+
+OfferAcceptedEvent
+
+Notification Service Down
+
+Retry 1
+
+Retry 2
+
+Retry 3
+
+Still Fail
+
+↓
+
+offer-events-dlq
+
+Admin can inspect failed events.
+
+
+Idempotency strategy
+
+X-Idempotency-Key:
+3d1d5d9a-fca2-4f61-9f4b-111
+
+
+store:
+idempotency_keys
+
+id
+
+idempotency_key
+
+request_hash
+
+response
+
+created_at
+
+Request
+    ↓
+Check Key Exists
+    ↓
+
+YES
+Return Old Response
+
+NO
+Process Request
+Store Response
+
+
+used for:
+
+Place Offer
+
+Accept Offer
+
+Create Order
+
+Payment
+
+Shipment Creation
+
+
+
