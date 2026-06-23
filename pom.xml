@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="https://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>4.1.0</version>
+		<relativePath/>
+	</parent>
+
+	<groupId>com.industry-connect</groupId>
+	<artifactId>ecoexchange</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<packaging>pom</packaging>
+
+	<name>ecoexchange</name>
+	<description>EcoExchange Microservices Platform</description>
+
+	<properties>
+		<java.version>25</java.version>
+
+		<!-- Spring Cloud compatible with Boot 4.x -->
+		<spring-cloud.version>2025.0.0</spring-cloud.version>
+	</properties>
+
+	<modules>
+		<module>config-service</module>
+		<module>discovery-service</module>
+		<module>apigateway</module>
+		<module>identity-service</module>
+		<module>marketplace-service</module>
+		<module>order-service</module>
+		<module>search-service</module>
+		<module>notification-service</module>
+		<module>analytics-service</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+</project>
