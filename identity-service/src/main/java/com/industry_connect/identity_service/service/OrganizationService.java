@@ -76,4 +76,12 @@ public class OrganizationService {
         org.setVerificationStatus("SUSPENDED");
         return organizationRepository.save(org);
     }
+
+    public String getOrganizationAdminEmail(Long orgId) {
+        return userRepository.findByOrganizationId(orgId).stream()
+                .filter(u -> "ADMIN".equalsIgnoreCase(u.getRole()))
+                .map(User::getEmail)
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("No admin user found for organization ID: " + orgId));
+    }
 }
