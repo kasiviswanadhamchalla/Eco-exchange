@@ -93,4 +93,27 @@ public class OrganizationControllerTest {
         assertNotNull(response);
         assertEquals(404, response.getStatusCode().value());
     }
+
+    @Test
+    void testGetOrganizationAdminEmail_Success() {
+        when(organizationService.getOrganizationAdminEmail(10L)).thenReturn("admin@eco.com");
+
+        ResponseEntity<String> response = organizationController.getOrganizationAdminEmail(10L);
+
+        assertNotNull(response);
+        assertEquals(200, response.getStatusCode().value());
+        assertEquals("admin@eco.com", response.getBody());
+        verify(organizationService, times(1)).getOrganizationAdminEmail(10L);
+    }
+
+    @Test
+    void testGetOrganizationAdminEmail_Failure() {
+        when(organizationService.getOrganizationAdminEmail(10L)).thenThrow(new RuntimeException("Not found"));
+
+        ResponseEntity<String> response = organizationController.getOrganizationAdminEmail(10L);
+
+        assertNotNull(response);
+        assertEquals(404, response.getStatusCode().value());
+        verify(organizationService, times(1)).getOrganizationAdminEmail(10L);
+    }
 }
