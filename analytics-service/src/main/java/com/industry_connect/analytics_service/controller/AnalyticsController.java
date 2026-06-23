@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+
 @RestController
 @RequestMapping("/api/analytics")
 public class AnalyticsController {
@@ -37,6 +39,7 @@ public class AnalyticsController {
     }
 
     @GetMapping("/audits")
+    @PreAuthorize("hasRole('PLATFORM_ADMIN')")
     public ResponseEntity<List<AuditEvent>> getAudits(
             @RequestParam(required = false) String service,
             @RequestParam(required = false) String action) {

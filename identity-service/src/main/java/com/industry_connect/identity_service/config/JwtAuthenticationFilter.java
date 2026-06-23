@@ -43,7 +43,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 String email = claims.getSubject();
                 String role = claims.get("role", String.class);
-                Long orgId = claims.get("organizationId", Long.class);
+                
+                Object orgIdObj = claims.get("organizationId");
+                Long orgId = orgIdObj != null ? ((Number) orgIdObj).longValue() : null;
 
                 if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                     // Map platform admin (role is ADMIN or PLATFORM_ADMIN and orgId is null)
