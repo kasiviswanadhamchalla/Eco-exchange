@@ -1,0 +1,33 @@
+Landing Page
+
+Login
+
+Register Organization
+
+Dashboard
+
+Marketplace
+
+Listing Details
+
+Create Listing
+
+Manage Listings
+
+Offers Received
+
+Offers Sent
+
+Orders
+
+Shipment Tracking
+
+Notifications
+
+Analytics
+
+Admin Dashboard
+
+Organization Verification
+
+Audit Viewer
