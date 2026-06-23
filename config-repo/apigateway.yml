@@ -1,0 +1,22 @@
+server:
+  port: 8080
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: identity-service
+          uri: lb://identity-service
+          predicates:
+            - Path=/api/auth/**, /api/organizations/**
+        - id: marketplace-service
+          uri: lb://marketplace-service
+          predicates:
+            - Path=/api/listings/**, /api/offers/**
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/api/orders/**, /api/shipments/**
+        - id: search-service
+          uri: lb://search-service
+          predicates:
+            - Path=/api/search/**
