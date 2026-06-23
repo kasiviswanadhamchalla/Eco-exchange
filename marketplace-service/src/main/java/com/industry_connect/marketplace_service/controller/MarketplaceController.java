@@ -175,10 +175,4 @@ public class MarketplaceController {
         OfferResponse response = marketplaceService.getOffer(id);
         return ResponseEntity.ok(response);
     }
-
-    @GetMapping("/offers/{id}")
-    public ResponseEntity<OfferResponse> getOffer(@PathVariable Long id) {
-        OfferResponse response = marketplaceService.getOffer(id);
-        return ResponseEntity.ok(response);
-    }
 }
