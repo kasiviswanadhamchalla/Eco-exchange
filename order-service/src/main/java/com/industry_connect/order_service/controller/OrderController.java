@@ -1,5 +1,6 @@
 package com.industry_connect.order_service.controller;
 
+import com.industry_connect.order_service.config.UserPrincipal;
 import com.industry_connect.order_service.dto.OrderRequest;
 import com.industry_connect.order_service.dto.ShipmentRequest;
 import com.industry_connect.order_service.entity.Order;
@@ -7,11 +8,10 @@ import com.industry_connect.order_service.entity.Shipment;
 import com.industry_connect.order_service.service.IdempotencyService;
 import com.industry_connect.order_service.service.OrderService;
 import com.industry_connect.order_service.service.ShipmentService;
-import com.industry_connect.order_service.util.JwtUtil;
-import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,18 +29,12 @@ public class OrderController {
     @Autowired
     private IdempotencyService idempotencyService;
 
-    @Autowired
-    private JwtUtil jwtUtil;
-
-    private Long resolveOrgId(Long xOrgId, String authHeader) {
+    private Long resolveOrgId(Long xOrgId, UserPrincipal principal) {
         if (xOrgId != null) {
             return xOrgId;
         }
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            Claims claims = jwtUtil.parseToken(authHeader);
-            if (claims != null) {
-                return claims.get("organizationId", Long.class);
-            }
+        if (principal != null) {
+            return principal.getOrganizationId();
         }
         return null;
     }
@@ -50,9 +44,9 @@ public class OrderController {
             @RequestBody OrderRequest request,
             @RequestHeader(value = "X-Idempotency-Key", required = false) String idempotencyKey,
             @RequestHeader(value = "X-Organization-Id", required = false) Long xOrgId,
-            @RequestHeader(value = "Authorization", required = false) String authHeader
+            @AuthenticationPrincipal UserPrincipal principal
     ) {
-        Long userOrgId = resolveOrgId(xOrgId, authHeader);
+        Long userOrgId = resolveOrgId(xOrgId, principal);
 
         if (idempotencyKey != null && !idempotencyKey.trim().isEmpty()) {
             var existing = idempotencyService.get(idempotencyKey);
@@ -84,9 +78,9 @@ public class OrderController {
     @GetMapping("/my")
     public ResponseEntity<?> getMyOrders(
             @RequestHeader(value = "X-Organization-Id", required = false) Long xOrgId,
-            @RequestHeader(value = "Authorization", required = false) String authHeader
+            @AuthenticationPrincipal UserPrincipal principal
     ) {
-        Long orgId = resolveOrgId(xOrgId, authHeader);
+        Long orgId = resolveOrgId(xOrgId, principal);
         if (orgId == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(java.util.Map.of("error", "Unauthorized access. Organization context missing."));
         }
