@@ -3,8 +3,8 @@ server:
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/ecoexchange_search?createDatabaseIfNotExist=true
-    username: ecoexchange
-    password: Admin@123
+    username: root
+    password: Nikhil@420
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:

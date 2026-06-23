@@ -124,4 +124,35 @@ public class MarketplaceServiceTest {
         assertEquals(15.0, activeListing.getAvailableQuantity());
         verify(eventPublisher, times(1)).publishOfferAccepted(eq(200L), eq(10L));
     }
+
+    @Test
+    void testGetOfferSuccess() {
+        Offer offer = new Offer();
+        offer.setId(200L);
+        offer.setListing(activeListing);
+        offer.setBuyerOrgId(200L);
+        offer.setQuantity(5.0);
+        offer.setOfferedPrice(450.0);
+        offer.setStatus("PENDING");
+
+        when(offerRepository.findById(200L)).thenReturn(Optional.of(offer));
+
+        OfferResponse response = marketplaceService.getOffer(200L);
+
+        assertNotNull(response);
+        assertEquals(200L, response.getId());
+        assertEquals(200L, response.getBuyerOrgId());
+        assertEquals("PENDING", response.getStatus());
+    }
+
+    @Test
+    void testGetOfferNotFound() {
+        when(offerRepository.findById(999L)).thenReturn(Optional.empty());
+
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            marketplaceService.getOffer(999L);
+        });
+
+        assertEquals("Offer not found with id: 999", exception.getMessage());
+    }
 }

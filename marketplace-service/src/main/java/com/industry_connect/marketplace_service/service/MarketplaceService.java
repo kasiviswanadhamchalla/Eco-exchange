@@ -320,4 +320,10 @@ public class MarketplaceService {
 
         return new OfferResponse(offer);
     }
+
+    public OfferResponse getOffer(Long id) {
+        Offer offer = offerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Offer not found with id: " + id));
+        return new OfferResponse(offer);
+    }
 }
