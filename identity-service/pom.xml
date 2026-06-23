@@ -16,6 +16,7 @@
 
 	<properties>
 		<java.version>25</java.version>
+		<argLine>-XX:+EnableDynamicAgentLoading</argLine>
 	</properties>
 
 	<dependencies>
@@ -57,6 +58,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 	</dependencies>
 
