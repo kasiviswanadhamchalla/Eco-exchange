@@ -1,0 +1,32 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: marketplace-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/ecoexchange_marketplace?createDatabaseIfNotExist=true
+    username: root
+    password: Nikhil@420
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+jwt:
+  secret: super-secret-key-for-jwt-signing-change-in-production
+  expiration: 86400000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+  instance:
+    prefer-ip-address: true
