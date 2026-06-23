@@ -20,3 +20,11 @@ spring:
           uri: lb://search-service
           predicates:
             - Path=/api/search/**
+        - id: notification-service
+          uri: lb://notification-service
+          predicates:
+            - Path=/api/notifications/**
+        - id: analytics-service
+          uri: lb://analytics-service
+          predicates:
+            - Path=/api/analytics/**
