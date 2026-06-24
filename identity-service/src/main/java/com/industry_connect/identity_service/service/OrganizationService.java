@@ -84,4 +84,8 @@ public class OrganizationService {
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("No admin user found for organization ID: " + orgId));
     }
+
+    public java.util.List<Organization> getAllOrganizations() {
+        return organizationRepository.findAll();
+    }
 }

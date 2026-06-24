@@ -57,4 +57,16 @@ public class ShipmentController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @GetMapping("/order/{orderId}")
+    public ResponseEntity<Shipment> getShipmentByOrderId(@PathVariable Long orderId) {
+        return shipmentService.getShipmentByOrderId(orderId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping
+    public ResponseEntity<java.util.List<Shipment>> getAllShipments() {
+        return ResponseEntity.ok(shipmentService.getAllShipments());
+    }
 }

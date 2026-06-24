@@ -326,4 +326,17 @@ public class MarketplaceService {
                 .orElseThrow(() -> new RuntimeException("Offer not found with id: " + id));
         return new OfferResponse(offer);
     }
+
+    public List<OfferResponse> getOffersSent(Long buyerOrgId) {
+        return offerRepository.findByBuyerOrgId(buyerOrgId).stream()
+                .map(OfferResponse::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<OfferResponse> getOffersReceived(Long sellerOrgId) {
+        return offerRepository.findAll().stream()
+                .filter(o -> o.getListing() != null && o.getListing().getSellerOrgId().equals(sellerOrgId))
+                .map(OfferResponse::new)
+                .collect(Collectors.toList());
+    }
 }
