@@ -31,7 +31,130 @@ export const Analytics = () => {
   const maxSavings = Math.max(...monthlyData.map(d => d.savings));
 
   const handleExport = () => {
-    alert('Generating ESG PDF Report...\nCircular Audit Trails: Verified.\nDownloaded.');
+    const printWindow = window.open('', '_blank');
+    const todayStr = new Date().toLocaleDateString();
+
+    const monthlyRows = monthlyData.map(d => `
+      <tr>
+        <td>2026 - ${d.month}</td>
+        <td>${d.tonnage} Tons</td>
+        <td>${d.carbon} MT</td>
+        <td>$${d.savings.toLocaleString()}</td>
+      </tr>
+    `).join('');
+
+    const materialRows = materialSplit.map(m => `
+      <tr>
+        <td>${m.name}</td>
+        <td>${m.tonnage} Tons</td>
+        <td>${m.percentage}%</td>
+      </tr>
+    `).join('');
+
+    printWindow.document.write(`
+      <html>
+        <head>
+          <title>EcoExchange ESG Impact & Audit Report</title>
+          <style>
+            body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; padding: 40px; color: #1e293b; line-height: 1.6; background-color: #ffffff; }
+            .header { border-bottom: 2px solid #10b981; padding-bottom: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
+            .logo { font-size: 22px; font-weight: bold; color: #10b981; text-transform: uppercase; letter-spacing: 1px; }
+            .title { font-size: 26px; margin: 0; color: #0f172a; font-weight: 800; }
+            .subtitle { font-size: 11px; color: #64748b; margin-top: 5px; font-weight: 500; }
+            .section { margin-bottom: 35px; }
+            .section-title { font-size: 13px; font-weight: bold; text-transform: uppercase; color: #475569; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; margin-bottom: 15px; letter-spacing: 0.5px; }
+            .grid { display: grid; grid-template-cols: repeat(3, 1fr); gap: 20px; margin-bottom: 30px; }
+            .card { background: #f8fafc; border: 1px solid #e2e8f0; padding: 18px; border-radius: 12px; }
+            .card-label { font-size: 9px; font-weight: bold; text-transform: uppercase; color: #64748b; letter-spacing: 0.5px; }
+            .card-value { font-size: 22px; font-weight: 800; color: #0f172a; margin-top: 6px; }
+            .card-desc { font-size: 10px; color: #64748b; margin-top: 4px; font-weight: 500; }
+            table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+            th { background: #f1f5f9; color: #475569; text-align: left; padding: 10px 12px; font-size: 11px; font-weight: 700; border-bottom: 1px solid #cbd5e1; text-transform: uppercase; letter-spacing: 0.5px; }
+            td { padding: 10px 12px; font-size: 11px; border-bottom: 1px solid #f1f5f9; color: #334155; font-weight: 500; }
+            tr:hover { background: #f8fafc; }
+            .footer { border-top: 1px solid #e2e8f0; padding-top: 20px; margin-top: 60px; text-align: center; font-size: 9px; color: #94a3b8; font-weight: 500; line-height: 1.5; }
+            @media print {
+              body { padding: 0; }
+              .card { border: 1px solid #cbd5e1; background: #ffffff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <div>
+              <h1 class="title">ESG Impact & Circularity Audit</h1>
+              <div class="subtitle">Platform circularity metrics & verified resource reallocation ledger</div>
+            </div>
+            <div class="logo">EcoExchange</div>
+          </div>
+
+          <div class="section">
+            <div class="grid">
+              <div class="card" style="border-left: 4px solid #10b981;">
+                <div class="card-label">Net CO2 Footprint Offset</div>
+                <div class="card-value" style="color: #10b981;">131.1 MT</div>
+                <div class="card-desc">Equivalent to planting 2,160 saplings</div>
+              </div>
+              <div class="card" style="border-left: 4px solid #6366f1;">
+                <div class="card-label">Total Material Diverted</div>
+                <div class="card-value" style="color: #6366f1;">364.7 Tons</div>
+                <div class="card-desc">Steel, Fly Ash, and Plastics repurposed</div>
+              </div>
+              <div class="card" style="border-left: 4px solid #06b6d4;">
+                <div class="card-label">Disposal Cost Savings</div>
+                <div class="card-value" style="color: #06b6d4;">$96,700</div>
+                <div class="card-desc">Reduced corporate landfill fees</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">ESG Monthly Progression Log</div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Month</th>
+                  <th>Material Diverted</th>
+                  <th>Net CO2 Offset</th>
+                  <th>Landfill Savings</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${monthlyRows}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="section">
+            <div class="section-title">Resource Circularity Split</div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Material Stream</th>
+                  <th>Tonnage Repurposed</th>
+                  <th>Circularity Percentage</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${materialRows}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="footer">
+            Report generated on ${todayStr} | Audit verification hash: EE-ESG-2026-REV5<br>
+            EcoExchange Platform Services & bull; B2B Industrial Materials Circular Network Ledger
+          </div>
+
+          <script>
+            window.onload = function() {
+              window.print();
+            }
+          </script>
+        </body>
+      </html>
+    `);
+    printWindow.document.close();
   };
 
   return (

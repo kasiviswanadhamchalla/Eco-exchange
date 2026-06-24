@@ -1,0 +1,37 @@
+.\kafka-storage.bat random-uuid
+
+7ChpWHynQlirRFCIGuJgJQ
+
+
+PS C:\kafka\bin\windows> .\kafka-server-start.bat ..\..\config\server.properties
+
+
+ # Marketplace Service listing events
+    .\kafka-topics.bat --create --bootstrap-server localhost:9092 --partitions 3 --replication-factor 1 --topic listing-events
+
+    # Marketplace Service offer events
+    .\kafka-topics.bat --create --bootstrap-server localhost:9092 --partitions 3 --replication-factor 1 --topic offer-events
+
+    # Retry topic for offer processing
+    .\kafka-topics.bat --create --bootstrap-server localhost:9092 --partitions 3 --replication-factor 1 --topic offer-events-retry
+
+    # Dead Letter Queue (DLQ) for offer failures
+    .\kafka-topics.bat --create --bootstrap-server localhost:9092 --partitions 3 --replication-factor 1 --topic offer-events-dlq
+
+    # Order Service order events
+    .\kafka-topics.bat --create --bootstrap-server localhost:9092 --partitions 3 --replication-factor 1 --topic order-events
+
+    # Logistics/Shipment flow events
+    .\kafka-topics.bat --create --bootstrap-server localhost:9092 --partitions 3 --replication-factor 1 --topic shipment-events
+
+    # Notification triggers
+    .\kafka-topics.bat --create --bootstrap-server localhost:9092 --partitions 3 --replication-factor 1 --topic notification-events
+
+    # Global platform audit events
+    .\kafka-topics.bat --create --bootstrap-server localhost:9092 --partitions 3 --replication-factor 1 --topic audit-events
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    .\kafka-topics.bat --list --bootstrap-server localhost:9092

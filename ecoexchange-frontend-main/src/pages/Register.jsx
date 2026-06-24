@@ -64,9 +64,14 @@ export const Register = () => {
 
         <CardContent className="mt-4">
           {success ? (
-            <div className="p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-center space-y-3">
-              <div className="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center mx-auto text-emerald-400">
-                <Check className="w-6 h-6 animate-bounce" />
+            <div className="p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-center space-y-4">
+              <div className="relative w-16 h-16 mx-auto flex items-center justify-center">
+                {/* Accent theme loading spinner */}
+                <div className="absolute inset-0 rounded-full border-4 border-emerald-500/20 border-t-emerald-400 animate-spin" />
+                {/* Pulsing check mark icon */}
+                <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 animate-pulse">
+                  <Check className="w-5 h-5" />
+                </div>
               </div>
               <h3 className="text-base font-bold text-slate-200">Registration Request Submitted!</h3>
               <p className="text-xs text-slate-400 leading-relaxed">
@@ -142,12 +147,12 @@ export const Register = () => {
                 </label>
                 <div className="grid grid-cols-2 gap-2 mt-1">
                   {categories.map((cat) => (
-                    <label key={cat} className="flex items-center gap-2 text-xs text-slate-300 cursor-pointer">
+                    <label key={cat} className="flex items-center gap-2 text-xs text-slate-300 cursor-pointer hover:text-emerald-400 transition-colors duration-200 select-none">
                       <input
                         type="checkbox"
                         checked={wasteFocus.includes(cat)}
                         onChange={() => handleCheckboxChange(cat)}
-                        className="rounded border-slate-700 bg-slate-900 text-emerald-500 focus:ring-0"
+                        className="rounded border-slate-700 bg-slate-900 text-emerald-500 focus:ring-0 transition-transform duration-200 hover:scale-110 active:scale-90"
                       />
                       {cat}
                     </label>
@@ -155,7 +160,11 @@ export const Register = () => {
                 </div>
               </div>
 
-              <Button type="submit" variant="primary" className="w-full mt-2">
+              <Button 
+                type="submit" 
+                variant="primary" 
+                className="w-full mt-2 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:shadow-lg hover:shadow-emerald-500/20 cursor-pointer"
+              >
                 Register Organization
               </Button>
             </form>

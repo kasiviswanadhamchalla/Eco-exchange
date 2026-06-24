@@ -5,8 +5,8 @@ spring:
     import: "optional:configserver:http://localhost:8888"
   datasource:
     url: jdbc:mysql://localhost:3306/ecoexchange_search?createDatabaseIfNotExist=true
-    username: root
-    password: Nikhil@420
+    username: ecoexchange
+    password: Admin@123
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:

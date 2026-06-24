@@ -91,13 +91,13 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       >
         <div className="flex flex-col h-full">
           {/* Sidebar Header Brand */}
-          <div className="h-16 flex items-center px-6 border-b border-slate-800/80 gap-3">
-            <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center text-slate-950 font-bold shadow-md shadow-emerald-500/20">
+          <div className="h-16 flex items-center px-6 border-b border-slate-800/80 gap-3 group/brand cursor-pointer">
+            <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center text-slate-950 font-bold shadow-md shadow-emerald-500/20 group-hover/brand:rotate-12 group-hover/brand:scale-110 transition-all duration-300">
               IC
             </div>
             <div>
-              <span className="font-semibold text-slate-100 block leading-tight">IndustryConnect</span>
-              <span className="text-[10px] text-emerald-400 uppercase tracking-widest font-bold">B2B Circular Economy</span>
+              <span className="font-semibold text-slate-100 block leading-tight group-hover/brand:text-emerald-400 transition-colors duration-300">IndustryConnect</span>
+              <span className="text-[10px] text-emerald-400 uppercase tracking-widest font-bold block leading-none mt-0.5 group-hover/brand:translate-x-0.5 transition-transform duration-300">B2B Circular Economy</span>
             </div>
           </div>
 
@@ -105,19 +105,19 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           <nav className="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto">
             <button
               onClick={() => handleNavClick('landing')}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition-all duration-200 ${
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group/portal cursor-pointer ${
                 currentPage === 'landing'
                   ? 'bg-slate-800 text-white font-medium shadow-inner'
                   : 'text-slate-400 hover:bg-slate-800/40 hover:text-slate-200'
               }`}
             >
-              <Home className="w-4 h-4" />
-              <span>Portal Landing</span>
+              <Home className="w-4 h-4 group-hover/portal:scale-110 group-hover/portal:rotate-6 transition-transform duration-300" />
+              <span className="group-hover/portal:translate-x-0.5 transition-transform duration-300">Portal Landing</span>
             </button>
 
             <div className="h-px bg-slate-850 my-4" />
 
-            <span className="px-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest block mb-2">
+            <span className="px-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest block mb-2 cursor-default select-none hover:text-emerald-400/80 hover:translate-x-0.5 transition-all duration-305">
               {currentRole} WORKSPACE
             </span>
 
@@ -128,18 +128,18 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 <button
                   key={item.name}
                   onClick={() => handleNavClick(item.page)}
-                  className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-sm transition-all duration-200 ${
+                  className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-sm transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group/navitem cursor-pointer ${
                     isActive
                       ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold text-glow-emerald'
                       : 'text-slate-400 hover:bg-slate-800/30 hover:text-slate-200 border border-transparent'
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <Icon className={`w-4.5 h-4.5 ${isActive ? 'text-emerald-400' : 'text-slate-400'}`} />
-                    <span>{item.name}</span>
+                    <Icon className={`w-4.5 h-4.5 group-hover/navitem:scale-110 group-hover/navitem:rotate-6 transition-transform duration-300 ${isActive ? 'text-emerald-400' : 'text-slate-400'}`} />
+                    <span className="group-hover/navitem:translate-x-0.5 transition-transform duration-300">{item.name}</span>
                   </div>
                   {item.badge !== undefined && item.badge > 0 && (
-                    <span className="bg-emerald-500 text-slate-950 font-bold text-[10px] px-2 py-0.5 rounded-full">
+                    <span className="bg-emerald-500 text-slate-950 font-bold text-[10px] px-2 py-0.5 rounded-full group-hover/navitem:animate-bounce">
                       {item.badge}
                     </span>
                   )}
@@ -150,13 +150,13 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
         </div>
 
         {/* Footer Identity + Role Switcher */}
-        <div className="p-4 border-t border-slate-800/80 bg-slate-950/20 space-y-3">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center font-bold text-white text-sm shrink-0">
+        <div className="p-4 border-t border-slate-800/80 bg-slate-950/20 space-y-3 group/footer">
+          <div className="flex items-center gap-3 cursor-pointer">
+            <div className="w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center font-bold text-white text-sm shrink-0 group-hover/footer:scale-110 group-hover/footer:rotate-12 transition-all duration-300">
               {activeOrg.name[0]}
             </div>
             <div className="overflow-hidden flex-1">
-              <span className="text-xs font-semibold text-slate-200 block truncate">{activeOrg.name}</span>
+              <span className="text-xs font-semibold text-slate-200 block truncate group-hover/footer:text-emerald-400 transition-colors duration-300">{activeOrg.name}</span>
               <span className="text-[10px] text-slate-400 capitalize block">{currentRole} account</span>
             </div>
           </div>
@@ -164,7 +164,7 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           <select
             value={currentRole}
             onChange={(e) => setCurrentRole(e.target.value)}
-            className="w-full glass-input text-[10px] px-2.5 py-1.5 rounded-lg text-slate-300 font-semibold cursor-pointer"
+            className="w-full glass-input text-[10px] px-2.5 py-1.5 rounded-lg text-slate-300 font-semibold cursor-pointer hover:border-emerald-500/40 hover:scale-[1.01] active:scale-[0.99] transition-all duration-300"
           >
             <option value="seller">Switch to: Seller View</option>
             <option value="buyer">Switch to: Buyer View</option>
