@@ -243,6 +243,70 @@ export const AppProvider = ({ children }) => {
   const [backendConnected, setBackendConnected] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
 
+  // Interactive Notification Guide Tour State
+  const [activeTour, setActiveTour] = useState(null);
+  const [tourStepIndex, setTourStepIndex] = useState(0);
+
+  const getTourSteps = (notif) => {
+    const title = notif.title.toLowerCase();
+    const msg = notif.message.toLowerCase();
+
+    if (title.includes('offer received') || title.includes('new offer') || msg.includes('placed a') || msg.includes('offer')) {
+      return [
+        {
+          title: "Bid & Offer Processing",
+          content: "The seller has to accept your bid to finalize the transaction and close the contract. Once they review and approve the offer, the platform will automatically generate the official Order and initialize the shipment logistics workflow. You can monitor the transaction progress and view updates as soon as the logistics team claims the cargo."
+        }
+      ];
+    } else if (title.includes('verification') || title.includes('review') || msg.includes('verification') || msg.includes('vetting')) {
+      return [
+        {
+          title: "Organization Verification",
+          content: "A new organization registration has been submitted and is currently undergoing verification. The platform administrator reviews corporate credentials, certificates, and tax identifiers to ensure regulatory compliance. Once verified, the organization is authorized to list materials and place bids."
+        }
+      ];
+    } else if (title.includes('shipment') || title.includes('dispatch') || title.includes('transit') || msg.includes('shipment') || msg.includes('en route') || msg.includes('delivered')) {
+      return [
+        {
+          title: "Shipment Tracking Details",
+          content: "This notice indicates that the shipment has been dispatched or progressed to a new transit milestone. The assigned logistics carrier updates checkpoints in real-time as cargo moves from loading to delivery. Accurate milestone updates ensure complete transparency and trigger the issuance of carbon offset credits upon final delivery."
+        }
+      ];
+    } else {
+      return [
+        {
+          title: "Platform Activity Details",
+          content: "This update keeps you informed of account events or changes in your order history ledger. You can inspect total billing costs, contractual details, and active transport records on your dashboard. Monitoring these notifications helps ensure timely communication across all stages of the transaction."
+        }
+      ];
+    }
+  };
+
+  const startTour = (notif) => {
+    const steps = getTourSteps(notif);
+    setActiveTour(steps);
+    setTourStepIndex(0);
+  };
+
+  const nextTourStep = () => {
+    setTourStepIndex(prev => {
+      if (prev + 1 < activeTour.length) {
+        return prev + 1;
+      } else {
+        return prev;
+      }
+    });
+  };
+
+  const prevTourStep = () => {
+    setTourStepIndex(prev => (prev > 0 ? prev - 1 : prev));
+  };
+
+  const skipTour = () => {
+    setActiveTour(null);
+    setTourStepIndex(0);
+  };
+
   // Fetch API helper
   const apiCall = async (endpoint, method = 'GET', body = null, requiresAuth = true) => {
     const headers = {
@@ -1188,7 +1252,14 @@ export const AppProvider = ({ children }) => {
       backendConnected,
       loginUser,
       logoutUser,
-      currentUser
+      currentUser,
+      // Interactive Guide Tour exports
+      activeTour,
+      tourStepIndex,
+      startTour,
+      nextTourStep,
+      prevTourStep,
+      skipTour
     }}>
       {children}
     </AppContext.Provider>
