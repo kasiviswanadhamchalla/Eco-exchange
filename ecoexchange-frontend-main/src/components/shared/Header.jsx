@@ -11,7 +11,8 @@ export const Header = ({ setSidebarOpen }) => {
     notifications,
     activeOrg,
     markAllNotificationsRead,
-    backendConnected
+    backendConnected,
+    startTour
   } = useApp();
 
   const [notifOpen, setNotifOpen] = useState(false);
@@ -103,10 +104,22 @@ export const Header = ({ setSidebarOpen }) => {
                   userNotifs.slice(0, 5).map((n) => (
                     <div key={n.id}
                       onClick={() => { setNotifOpen(false); setCurrentPage('notifications'); }}
-                      className={`p-3 cursor-pointer hover:bg-slate-900/40 transition-all ${!n.read ? 'bg-emerald-500/5' : ''}`}>
-                      <p className="text-xs font-semibold text-slate-200">{n.title}</p>
-                      <p className="text-[11px] text-slate-400 truncate mt-0.5">{n.message}</p>
-                      <span className="text-[9px] text-slate-500">{n.time}</span>
+                      className={`p-3 cursor-pointer hover:bg-slate-900/60 transition-all duration-300 flex justify-between items-start gap-2 group/notif ${!n.read ? 'bg-emerald-500/5' : ''}`}>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-semibold text-slate-200 group-hover/notif:text-emerald-400 transition-colors duration-200">{n.title}</p>
+                        <p className="text-[11px] text-slate-400 truncate mt-0.5">{n.message}</p>
+                        <span className="text-[9px] text-slate-500">{n.time}</span>
+                      </div>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setNotifOpen(false);
+                          startTour(n);
+                        }}
+                        className="px-2 py-0.5 rounded bg-emerald-600/20 hover:bg-emerald-600 border border-emerald-500/30 hover:border-emerald-400 text-emerald-400 hover:text-white text-[9px] font-bold transition-all duration-300 hover:scale-105 active:scale-95 shrink-0 mt-0.5 cursor-pointer"
+                      >
+                        Know More!
+                      </button>
                     </div>
                   ))
                 )}
