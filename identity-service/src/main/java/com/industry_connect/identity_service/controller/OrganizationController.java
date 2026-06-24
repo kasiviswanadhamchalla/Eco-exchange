@@ -53,4 +53,9 @@ public class OrganizationController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping
+    public ResponseEntity<java.util.List<Organization>> getAllOrganizations() {
+        return ResponseEntity.ok(organizationService.getAllOrganizations());
+    }
 }

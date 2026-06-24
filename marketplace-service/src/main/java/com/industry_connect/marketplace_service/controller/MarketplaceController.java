@@ -175,4 +175,20 @@ public class MarketplaceController {
         OfferResponse response = marketplaceService.getOffer(id);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/offers/sent")
+    public ResponseEntity<List<OfferResponse>> getOffersSent(@AuthenticationPrincipal UserPrincipal principal) {
+        if (principal == null || principal.getOrganizationId() == null) {
+            throw new RuntimeException("Unauthorized");
+        }
+        return ResponseEntity.ok(marketplaceService.getOffersSent(principal.getOrganizationId()));
+    }
+
+    @GetMapping("/offers/received")
+    public ResponseEntity<List<OfferResponse>> getOffersReceived(@AuthenticationPrincipal UserPrincipal principal) {
+        if (principal == null || principal.getOrganizationId() == null) {
+            throw new RuntimeException("Unauthorized");
+        }
+        return ResponseEntity.ok(marketplaceService.getOffersReceived(principal.getOrganizationId()));
+    }
 }

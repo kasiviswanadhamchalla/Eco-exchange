@@ -108,4 +108,8 @@ public class ShipmentService {
     public Optional<Shipment> getShipmentByOrderId(Long orderId) {
         return shipmentRepository.findByOrderId(orderId);
     }
+
+    public java.util.List<Shipment> getAllShipments() {
+        return shipmentRepository.findAll();
+    }
 }
