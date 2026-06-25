@@ -51,6 +51,21 @@ public class ShipmentController {
         }
     }
 
+    @PutMapping("/{id}/status")
+    @PreAuthorize("hasAnyRole('PLATFORM_ADMIN', 'ORG_ADMIN', 'ADMIN', 'LOGISTICS_PARTNER')")
+    public ResponseEntity<?> updateShipmentStatus(@PathVariable Long id, @RequestBody java.util.Map<String, String> request) {
+        try {
+            String status = request.get("status");
+            if (status == null || status.trim().isEmpty()) {
+                return ResponseEntity.badRequest().body(java.util.Map.of("error", "Status is required"));
+            }
+            Shipment shipment = shipmentService.updateStatus(id, status);
+            return ResponseEntity.ok(shipment);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Shipment> getShipment(@PathVariable Long id) {
         return shipmentService.getShipment(id)

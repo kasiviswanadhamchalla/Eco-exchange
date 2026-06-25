@@ -23,7 +23,7 @@ import java.util.List;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    @Value("${jwt.secret:default-secret-key-for-development-change-in-production}")
+    @Value("${jwt.secret:super-secret-key-for-jwt-signing-change-in-production}")
     private String jwtSecret;
 
     @Override

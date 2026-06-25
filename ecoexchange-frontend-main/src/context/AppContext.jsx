@@ -471,18 +471,23 @@ export const AppProvider = ({ children }) => {
       const shipmentData = await apiCall('/api/shipments', 'GET', null, true);
       if (shipmentData && Array.isArray(shipmentData)) {
         const mappedShipments = shipmentData.map(s => {
+          const statusUpper = s.status ? s.status.toUpperCase() : 'ASSIGNED';
+          let currentMilestone = 0;
+          if (statusUpper === 'ASSIGNED') currentMilestone = 0;
+          else if (statusUpper === 'PICKED_UP') currentMilestone = 1;
+          else if (statusUpper === 'IN_TRANSIT') currentMilestone = 2;
+          else if (statusUpper === 'OUT_FOR_DELIVERY') currentMilestone = 3;
+          else if (statusUpper === 'DELIVERED') currentMilestone = 4;
+
+          const hasReached = (mIndex) => currentMilestone >= mIndex;
+
           const milestones = [
             { title: 'Shipment Assigned', time: 'Just now', description: 'Assigned to EcoTrans Logistics Ltd' },
-            { title: 'Cargo Loaded & Inspected', time: s.status === 'PICKED_UP' || s.status === 'DELIVERED' ? 'Recently' : null, description: 'Pickup check from seller site' },
-            { title: 'In Transit', time: s.status === 'PICKED_UP' || s.status === 'DELIVERED' ? 'Recently' : null, description: 'Cargo on highway route' },
-            { title: 'Out for Delivery', time: s.status === 'DELIVERED' ? 'Recently' : null, description: 'Arriving at buyer storage terminal' },
-            { title: 'Delivered', time: s.status === 'DELIVERED' ? 'Recently' : null, description: 'Delivered and signed off' }
+            { title: 'Cargo Loaded & Inspected', time: hasReached(1) ? 'Recently' : null, description: 'Pickup check from seller site' },
+            { title: 'In Transit', time: hasReached(2) ? 'Recently' : null, description: 'Cargo on highway route' },
+            { title: 'Out for Delivery', time: hasReached(3) ? 'Recently' : null, description: 'Arriving at buyer storage terminal' },
+            { title: 'Delivered', time: hasReached(4) ? 'Recently' : null, description: 'Delivered and signed off' }
           ];
-
-          let currentMilestone = 0;
-          if (s.status === 'ASSIGNED') currentMilestone = 0;
-          else if (s.status === 'PICKED_UP') currentMilestone = 2;
-          else if (s.status === 'DELIVERED') currentMilestone = 4;
 
           return {
             id: `shp-${s.id}`,
@@ -1082,11 +1087,13 @@ export const AppProvider = ({ children }) => {
     if (backendConnected) {
       try {
         const cleanShipmentId = shipmentId.replace('shp-', '');
-        let endpoint = `/api/shipments/${cleanShipmentId}/pickup`;
-        if (milestoneIndex === 4) {
-          endpoint = `/api/shipments/${cleanShipmentId}/deliver`;
-        }
-        await apiCall(endpoint, 'PUT', null, true);
+        let status = 'ASSIGNED';
+        if (milestoneIndex === 1) status = 'PICKED_UP';
+        else if (milestoneIndex === 2) status = 'IN_TRANSIT';
+        else if (milestoneIndex === 3) status = 'OUT_FOR_DELIVERY';
+        else if (milestoneIndex === 4) status = 'DELIVERED';
+
+        await apiCall(`/api/shipments/${cleanShipmentId}/status`, 'PUT', { status }, true);
         await refreshData();
       } catch (err) {
         console.error("Backend shipment update failed", err);
