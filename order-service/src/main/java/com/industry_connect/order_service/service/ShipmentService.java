@@ -101,6 +101,31 @@ public class ShipmentService {
         return savedShipment;
     }
 
+    @Transactional
+    public Shipment updateStatus(Long id, String status) {
+        Shipment shipment = shipmentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Shipment not found with id: " + id));
+
+        shipment.setStatus(status);
+        Shipment savedShipment = shipmentRepository.save(shipment);
+
+        // Update corresponding Order status if delivered
+        if ("DELIVERED".equalsIgnoreCase(status)) {
+            orderRepository.findById(shipment.getOrderId()).ifPresent(order -> {
+                order.setStatus("DELIVERED");
+                orderRepository.save(order);
+            });
+            eventPublisher.publishShipmentDelivered(id);
+        } else if ("PICKED_UP".equalsIgnoreCase(status) || "IN_TRANSIT".equalsIgnoreCase(status) || "OUT_FOR_DELIVERY".equalsIgnoreCase(status)) {
+            orderRepository.findById(shipment.getOrderId()).ifPresent(order -> {
+                order.setStatus("IN_TRANSIT");
+                orderRepository.save(order);
+            });
+        }
+
+        return savedShipment;
+    }
+
     public Optional<Shipment> getShipment(Long id) {
         return shipmentRepository.findById(id);
     }
