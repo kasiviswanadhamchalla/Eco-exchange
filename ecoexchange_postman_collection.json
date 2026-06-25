@@ -10,7 +10,7 @@
 			"name": "Auth & Identity",
 			"item": [
 				{
-					"name": "Register User",
+					"name": "Register Seller",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -21,7 +21,63 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"EcoExchange Corp\",\n  \"industryType\": \"PLASTIC_RECYCLING\",\n  \"gstNumber\": \"22AAAAA0000A1Z5\",\n  \"city\": \"Boston\",\n  \"state\": \"Massachusetts\",\n  \"country\": \"USA\",\n  \"contactName\": \"Admin User\",\n  \"email\": \"admin@ecoexchange.com\",\n  \"password\": \"Password123!\"\n}"
+							"raw": "{\n  \"name\": \"EcoSteel Recycling Ltd\",\n  \"industryType\": \"Seller\",\n  \"gstNumber\": \"22AAAAA0000A1Z5\",\n  \"city\": \"Boston\",\n  \"state\": \"Massachusetts\",\n  \"country\": \"USA\",\n  \"contactName\": \"Sarah Connor\",\n  \"email\": \"sarah@ecosteel.com\",\n  \"password\": \"Password123!\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Buyer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"GreenBuild Construction\",\n  \"industryType\": \"Buyer\",\n  \"gstNumber\": \"33BBBBB0000B2Z6\",\n  \"city\": \"Chicago\",\n  \"state\": \"Illinois\",\n  \"country\": \"USA\",\n  \"contactName\": \"John Doe\",\n  \"email\": \"john@greenbuild.com\",\n  \"password\": \"Password123!\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Logistics",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"EcoTrans Logistics Ltd\",\n  \"industryType\": \"Logistics\",\n  \"gstNumber\": \"44CCCCC0000C3Z7\",\n  \"city\": \"Detroit\",\n  \"state\": \"Michigan\",\n  \"country\": \"USA\",\n  \"contactName\": \"Logistics Admin\",\n  \"email\": \"logistics@ecotrans.com\",\n  \"password\": \"Password123!\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/auth/register",

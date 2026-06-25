@@ -1,0 +1,1059 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-06-25T06:11:13.857Z",
+  "__export_source": "insomnia.desktop.app:v8.0.0",
+  "resources": [
+    {
+      "_id": "wrk_8b490e804db3",
+      "parentId": null,
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "name": "EcoExchange Microservices API",
+      "description": "Collection of all API endpoints for EcoExchange Microservices platform routed via apigateway (http://localhost:8080)",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "env_6a83f42b3172",
+      "parentId": "wrk_8b490e804db3",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "name": "Base Environment",
+      "data": {
+        "baseUrl": "http://localhost:8080",
+        "token": "YOUR_JWT_TOKEN_HERE"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "baseUrl",
+          "token"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1718000000000,
+      "_type": "environment"
+    },
+    {
+      "_id": "fld_8756984d3040",
+      "parentId": "wrk_8b490e804db3",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "name": "Auth & Identity",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 1782367873856,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_3070652c97a2",
+      "parentId": "fld_8756984d3040",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/auth/register",
+      "name": "Register Seller",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"EcoSteel Recycling Ltd\",\n  \"industryType\": \"Seller\",\n  \"gstNumber\": \"22AAAAA0000A1Z5\",\n  \"city\": \"Boston\",\n  \"state\": \"Massachusetts\",\n  \"country\": \"USA\",\n  \"contactName\": \"Sarah Connor\",\n  \"email\": \"sarah@ecosteel.com\",\n  \"password\": \"Password123!\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_528a6b16acda",
+      "parentId": "fld_8756984d3040",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/auth/register",
+      "name": "Register Buyer",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"GreenBuild Construction\",\n  \"industryType\": \"Buyer\",\n  \"gstNumber\": \"33BBBBB0000B2Z6\",\n  \"city\": \"Chicago\",\n  \"state\": \"Illinois\",\n  \"country\": \"USA\",\n  \"contactName\": \"John Doe\",\n  \"email\": \"john@greenbuild.com\",\n  \"password\": \"Password123!\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_b211460b46fe",
+      "parentId": "fld_8756984d3040",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/auth/register",
+      "name": "Register Logistics",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"EcoTrans Logistics Ltd\",\n  \"industryType\": \"Logistics\",\n  \"gstNumber\": \"44CCCCC0000C3Z7\",\n  \"city\": \"Detroit\",\n  \"state\": \"Michigan\",\n  \"country\": \"USA\",\n  \"contactName\": \"Logistics Admin\",\n  \"email\": \"logistics@ecotrans.com\",\n  \"password\": \"Password123!\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_0cddf80348e4",
+      "parentId": "fld_8756984d3040",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/auth/login",
+      "name": "Login User",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"admin@ecoexchange.com\",\n  \"password\": \"Password123!\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_46a337f9dccd",
+      "parentId": "fld_8756984d3040",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/auth/login",
+      "name": "Login Platform Admin",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"platformadmin@ecoexchange.com\",\n  \"password\": \"Password123!\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_2e0a91b6ef06",
+      "parentId": "fld_8756984d3040",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/organizations/1",
+      "name": "Get Organization By ID",
+      "description": "",
+      "method": "GET",
+      "body": {
+        "mimeType": "",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_1363c123a6d5",
+      "parentId": "fld_8756984d3040",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/organizations/1/verify",
+      "name": "Verify Organization (PLATFORM_ADMIN only)",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_6d9707e1b6a4",
+      "parentId": "fld_8756984d3040",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/organizations/1/suspend",
+      "name": "Suspend Organization (PLATFORM_ADMIN only)",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_f50d97a85ff5",
+      "parentId": "fld_8756984d3040",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/organizations/1/admin-email",
+      "name": "Get Organization Admin Email",
+      "description": "",
+      "method": "GET",
+      "body": {
+        "mimeType": "",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "fld_5146b1ccb0b0",
+      "parentId": "wrk_8b490e804db3",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "name": "Marketplace (Listings & Offers)",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 1782367873856,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_1008b98b69b8",
+      "parentId": "fld_5146b1ccb0b0",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/listings",
+      "name": "Create Listing",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"title\": \"Industrial Plastic Scraps\",\n  \"description\": \"Clean HDPE plastic scraps available for pickup.\",\n  \"materialCategory\": \"PLASTIC\",\n  \"quantityTons\": 15.5,\n  \"pricePerTon\": 450.00,\n  \"location\": \"Warehouse A, Boston\",\n  \"qualityCertificates\": [\n    {\n      \"certificateName\": \"ISO 9001 HDPE Quality\",\n      \"issuedBy\": \"Standard Cert Inc\",\n      \"issueDate\": \"2026-01-10\"\n    }\n  ]\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+          "description": "",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_da79bcf899ab",
+      "parentId": "fld_5146b1ccb0b0",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/listings?keyword=Plastic",
+      "name": "Get Listings (Public)",
+      "description": "",
+      "method": "GET",
+      "body": {
+        "mimeType": "",
+        "text": ""
+      },
+      "parameters": [
+        {
+          "name": "categoryId",
+          "value": "1",
+          "description": "",
+          "disabled": true
+        },
+        {
+          "name": "sellerOrgId",
+          "value": "1",
+          "description": "",
+          "disabled": true
+        },
+        {
+          "name": "keyword",
+          "value": "Plastic",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_cc691dc01959",
+      "parentId": "fld_5146b1ccb0b0",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/listings/1",
+      "name": "Get Listing By ID (Public)",
+      "description": "",
+      "method": "GET",
+      "body": {
+        "mimeType": "",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_b482358dd107",
+      "parentId": "fld_5146b1ccb0b0",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/listings/1",
+      "name": "Update Listing",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"title\": \"Updated Industrial Plastic Scraps\",\n  \"description\": \"Clean HDPE scraps. Stored in dry facility.\",\n  \"materialCategory\": \"PLASTIC\",\n  \"quantityTons\": 20.0,\n  \"pricePerTon\": 430.00,\n  \"location\": \"Warehouse B, Boston\",\n  \"qualityCertificates\": []\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+          "description": "",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_3e01015a5da6",
+      "parentId": "fld_5146b1ccb0b0",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/listings/1",
+      "name": "Delete Listing",
+      "description": "",
+      "method": "DELETE",
+      "body": {
+        "mimeType": "",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_f155df7ff4cd",
+      "parentId": "fld_5146b1ccb0b0",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/listings/1/activate",
+      "name": "Activate Listing",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_495aa6b9140e",
+      "parentId": "fld_5146b1ccb0b0",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/listings/1/offers",
+      "name": "Place Offer",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"bidPricePerTon\": 410.00,\n  \"quantityTons\": 10.0,\n  \"message\": \"Interested in buying a subset of listing scraps.\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+          "description": "",
+          "disabled": false
+        },
+        {
+          "name": "X-Idempotency-Key",
+          "value": "unique-idempotency-key-uuid-1",
+          "description": "Optional idempotency key",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_bbe222d44ac2",
+      "parentId": "fld_5146b1ccb0b0",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/listings/1/offers",
+      "name": "Get Offers for Listing",
+      "description": "",
+      "method": "GET",
+      "body": {
+        "mimeType": "",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_f84abc312cde",
+      "parentId": "fld_5146b1ccb0b0",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/offers/1/accept",
+      "name": "Accept Offer",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+          "description": "",
+          "disabled": false
+        },
+        {
+          "name": "X-Idempotency-Key",
+          "value": "unique-accept-idempotency-key",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_2b276369f9d0",
+      "parentId": "fld_5146b1ccb0b0",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/offers/1/reject",
+      "name": "Reject Offer",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_3c8021222f64",
+      "parentId": "fld_5146b1ccb0b0",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/offers/1",
+      "name": "Get Offer by ID",
+      "description": "",
+      "method": "GET",
+      "body": {
+        "mimeType": "",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "fld_a033eb17c843",
+      "parentId": "wrk_8b490e804db3",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "name": "Orders & Shipments",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 1782367873856,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_7028199c5d36",
+      "parentId": "fld_a033eb17c843",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/orders/1",
+      "name": "Get Order Details",
+      "description": "",
+      "method": "GET",
+      "body": {
+        "mimeType": "",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_d6fd6770ca00",
+      "parentId": "fld_a033eb17c843",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/shipments/1/assign",
+      "name": "Assign Shipment Partner",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"partnerId\": 99\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+          "description": "",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_7395f6b111e4",
+      "parentId": "fld_a033eb17c843",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/shipments/1/pickup",
+      "name": "Pickup Shipment",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_f25de690d278",
+      "parentId": "fld_a033eb17c843",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/shipments/1/deliver",
+      "name": "Deliver Shipment",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_7a22403151d4",
+      "parentId": "fld_a033eb17c843",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/shipments/1",
+      "name": "Get Shipment Details",
+      "description": "",
+      "method": "GET",
+      "body": {
+        "mimeType": "",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "fld_d766e71d8ca3",
+      "parentId": "wrk_8b490e804db3",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "name": "Search",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 1782367873856,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_85ffc374ac08",
+      "parentId": "fld_d766e71d8ca3",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/search/listings?query=hdpe&category=PLASTIC&minPrice=100&maxPrice=1000&location=Boston",
+      "name": "Search Listings (Public)",
+      "description": "",
+      "method": "GET",
+      "body": {
+        "mimeType": "",
+        "text": ""
+      },
+      "parameters": [
+        {
+          "name": "query",
+          "value": "hdpe",
+          "description": "",
+          "disabled": false
+        },
+        {
+          "name": "category",
+          "value": "PLASTIC",
+          "description": "",
+          "disabled": false
+        },
+        {
+          "name": "minPrice",
+          "value": "100",
+          "description": "",
+          "disabled": false
+        },
+        {
+          "name": "maxPrice",
+          "value": "1000",
+          "description": "",
+          "disabled": false
+        },
+        {
+          "name": "location",
+          "value": "Boston",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "fld_dc53bbe776b6",
+      "parentId": "wrk_8b490e804db3",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "name": "Notifications",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 1782367873856,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_c3f6b2d8b84c",
+      "parentId": "fld_dc53bbe776b6",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/notifications",
+      "name": "Get All Notifications (PLATFORM_ADMIN only)",
+      "description": "",
+      "method": "GET",
+      "body": {
+        "mimeType": "",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_5f4e96c9bc2f",
+      "parentId": "fld_dc53bbe776b6",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/notifications/user/1",
+      "name": "Get Notifications by User",
+      "description": "",
+      "method": "GET",
+      "body": {
+        "mimeType": "",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_160fc608935b",
+      "parentId": "fld_dc53bbe776b6",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/notifications/1/read",
+      "name": "Mark Notification as Read",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "fld_b7cc998c25e9",
+      "parentId": "wrk_8b490e804db3",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "name": "Analytics",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 1782367873856,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_e1c6a24c58ce",
+      "parentId": "fld_b7cc998c25e9",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/analytics/metrics/daily?startDate=2026-06-01&endDate=2026-06-30",
+      "name": "Get Daily Metrics",
+      "description": "",
+      "method": "GET",
+      "body": {
+        "mimeType": "",
+        "text": ""
+      },
+      "parameters": [
+        {
+          "name": "startDate",
+          "value": "2026-06-01",
+          "description": "",
+          "disabled": false
+        },
+        {
+          "name": "endDate",
+          "value": "2026-06-30",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_edda1af70e0a",
+      "parentId": "fld_b7cc998c25e9",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/analytics/metrics/summary",
+      "name": "Get Summary Metrics",
+      "description": "",
+      "method": "GET",
+      "body": {
+        "mimeType": "",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_371673427021",
+      "parentId": "fld_b7cc998c25e9",
+      "modified": 1782367873856,
+      "created": 1782367873856,
+      "url": "{{baseUrl}}/api/analytics/audits?service=marketplace-service&action=LISTING_CREATED",
+      "name": "Get Audits (PLATFORM_ADMIN only)",
+      "description": "",
+      "method": "GET",
+      "body": {
+        "mimeType": "",
+        "text": ""
+      },
+      "parameters": [
+        {
+          "name": "service",
+          "value": "marketplace-service",
+          "description": "",
+          "disabled": false
+        },
+        {
+          "name": "action",
+          "value": "LISTING_CREATED",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1782367873856,
+      "isPrivate": false,
+      "_type": "request"
+    }
+  ]
+}

@@ -44,12 +44,24 @@ public class OrganizationService {
 
         organization = organizationRepository.save(organization);
 
+        String assignedRole = "ADMIN";
+        String indType = request.getIndustryType();
+        if (indType != null) {
+            if ("Seller".equalsIgnoreCase(indType) || "SELLER".equalsIgnoreCase(indType)) {
+                assignedRole = "SELLER";
+            } else if ("Buyer".equalsIgnoreCase(indType) || "BUYER".equalsIgnoreCase(indType)) {
+                assignedRole = "BUYER";
+            } else if ("Logistics".equalsIgnoreCase(indType) || "LOGISTICS".equalsIgnoreCase(indType)) {
+                assignedRole = "LOGISTICS_PARTNER";
+            }
+        }
+
         User user = new User(
                 organization.getId(),
                 request.getContactName(),
                 request.getEmail(),
                 passwordEncoder.encode(request.getPassword()),
-                "ADMIN",
+                assignedRole,
                 "ACTIVE"
         );
         userRepository.save(user);
@@ -79,7 +91,10 @@ public class OrganizationService {
 
     public String getOrganizationAdminEmail(Long orgId) {
         return userRepository.findByOrganizationId(orgId).stream()
-                .filter(u -> "ADMIN".equalsIgnoreCase(u.getRole()))
+                .filter(u -> "ADMIN".equalsIgnoreCase(u.getRole())
+                        || "SELLER".equalsIgnoreCase(u.getRole())
+                        || "BUYER".equalsIgnoreCase(u.getRole())
+                        || "LOGISTICS_PARTNER".equalsIgnoreCase(u.getRole()))
                 .map(User::getEmail)
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("No admin user found for organization ID: " + orgId));
